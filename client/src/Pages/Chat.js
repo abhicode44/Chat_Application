@@ -8,7 +8,7 @@ import ChatContainer from "../Components/ChatContainer";
 import io from "socket.io-client";
 
 export default function Chat() {
-  const host = "https://chat-application-9sdd.onrender.com";
+  const host = "https://chat-application-plew.onrender.com";
   const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -45,7 +45,7 @@ export default function Chat() {
       if (currentUser) {
         if (currentUser.isAvatarImageSet) {
           const { data } = await axios.get(
-            `https://chat-application-9sdd.onrender.com/api/auth/allusers/${currentUser._id}`
+            `https://chat-application-plew.onrender.com/api/auth/allusers/${currentUser._id}`
           );
           setContacts(data);
         } else {
