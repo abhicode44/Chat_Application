@@ -4,7 +4,6 @@ import Logout from './Logout';
 import ChatInput from './ChatInput';
 import axios from 'axios';
 
-
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
@@ -13,7 +12,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     const fetchMessages = async () => {
       if (currentUser && currentChat) {
         try {
-          const response = await axios.post("https://chat-application-plew.onrender.com/api/messages/getmsg", {
+          const response = await axios.post("http://localhost:5000/api/messages/getmsg", {
             from: currentUser._id,
             to: currentChat._id,
           });
@@ -26,7 +25,6 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     fetchMessages();
   }, [currentChat, currentUser]);
 
-  // Listen for incoming messages - ensure the listener is only attached once
   useEffect(() => {
     if (socket.current) {
       const handleReceiveMessage = (msg) => {
@@ -39,14 +37,14 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
       socket.current.on("msg-recieve", handleReceiveMessage);
 
       return () => {
-        socket.current.off("msg-recieve", handleReceiveMessage);  // Clean up the listener
+        socket.current.off("msg-recieve", handleReceiveMessage);
       };
     }
   }, [socket]);
 
   const handleSendMsg = async (msg) => {
     try {
-      await axios.post("https://chat-application-plew.onrender.com/api/messages/addmsg", {
+      await axios.post("http://localhost:5000/api/messages/addmsg", {
         from: currentUser._id,
         to: currentChat._id,
         message: msg,
@@ -59,7 +57,6 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
-      // Emit the message to the server
       socket.current.emit("send-msg", {
         to: currentChat._id,
         from: currentUser._id,
@@ -104,7 +101,6 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
                 </div>
               </div>
             ))}
-            {/* Scroll marker */}
             <div ref={scrollRef} />
           </div>
 
@@ -116,18 +112,20 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 }
 
 const Container = styled.div`
-  padding-top: 1rem;
   display: grid;
   grid-template-rows: 10% 80% 10%;
   gap: 0.1rem;
   overflow: hidden;
+  height: 100%;
+  padding: 1rem;
 
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     background-color: #080420;
+    border-radius: 8px;
 
     .header-left {
       display: flex;
@@ -135,7 +133,7 @@ const Container = styled.div`
 
       .avatar {
         img {
-          height: 3rem;
+          height: 2.5rem;
           border-radius: 50%;
         }
       }
@@ -147,26 +145,37 @@ const Container = styled.div`
         }
       }
     }
+
+    @media (max-width: 768px) {
+      .username h3 {
+        font-size: 1rem;
+      }
+
+      .avatar img {
+        height: 2rem;
+      }
+    }
   }
 
   .chat-messages {
-    padding: 1rem 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    overflow: auto;
+    overflow-y: auto;
     background-color: #0d0d30;
+    border-radius: 8px;
 
     .message {
       display: flex;
       align-items: center;
 
       .content {
-        max-width: 40%;
+        max-width: 60%;
         overflow-wrap: break-word;
-        padding: 1rem;
-        font-size: 1.1rem;
-        border-radius: 1rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        border-radius: 0.5rem;
         color: white;
 
         p {
@@ -190,5 +199,33 @@ const Container = styled.div`
         }
       }
     }
+
+    @media (max-width: 768px) {
+      .content {
+        max-width: 80%;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content {
+        max-width: 100%;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+    grid-template-rows: 15% 70% 15%;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.2rem;
+    grid-template-rows: 20% 60% 20%;
   }
 `;
+
+
