@@ -28,7 +28,7 @@ const server = app.listen(PORT, () => {
 // Setup socket.io with CORS configuration
 const io = socket(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
         credentials: true,
     },
 });
