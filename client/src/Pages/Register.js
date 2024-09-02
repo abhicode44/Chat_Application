@@ -28,7 +28,7 @@ function Register() {
     event.preventDefault();
     if (handleValidation()) {
       const { password, confirmpassword, username, email } = values;
-      const { data } = await axios.post("http://localhost:5000/api/auth/register", {
+      const { data } = await axios.post("https://chat-application-9sdd.onrender.com/api/auth/register", {
         username, email, password, confirmpassword
       });
       if (data.status === false) {
