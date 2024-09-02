@@ -46,7 +46,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   const handleSendMsg = async (msg) => {
     try {
-      await axios.post("http://localhost:5000/api/messages/addmsg", {
+      await axios.post("https://chat-application-9sdd.onrender.com/api/messages/addmsg", {
         from: currentUser._id,
         to: currentChat._id,
         message: msg,
