@@ -8,7 +8,7 @@ import ChatContainer from "../Components/ChatContainer";
 import io from "socket.io-client";
 
 export default function Chat() {
-  const host = "https://chat-application-plew.onrender.com";
+  const host = "http://localhost:5000";
   const socket = useRef();
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -45,7 +45,7 @@ export default function Chat() {
       if (currentUser) {
         if (currentUser.isAvatarImageSet) {
           const { data } = await axios.get(
-            `https://chat-application-plew.onrender.com/api/auth/allusers/${currentUser._id}`
+            `http://localhost:5000/api/auth/allusers/${currentUser._id}`
           );
           setContacts(data);
         } else {
@@ -94,10 +94,42 @@ const Container = styled.div`
     border-radius: 12px;
     overflow: hidden;
     gap: 1rem;
-    grid-template-rows: auto 1fr; // Adjust rows for better flexibility
+
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 2fr;
+    }
+
+    @media only screen and (max-width: 480px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1.5fr;
+    }
   }
 
- 
+  @media only screen and (max-width: 1200px) {
+    padding: 0.5rem;
+
+    .container {
+      max-width: 100%;
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      grid-template-rows: 1fr;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .container {
+      max-width: 100%;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+  }
 `;
+
 
 
