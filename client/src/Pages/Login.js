@@ -45,7 +45,7 @@ function Login() {
     if (handleValidation()) {
       const { username, password } = values;
       try {
-        const { data } = await axios.post("https://chat-application-9sdd.onrender.com/api/auth/login", {
+        const { data } = await axios.post("https://chat-application-plew.onrender.com/api/auth/login", {
           username,
           password,
         });
