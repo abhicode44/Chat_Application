@@ -77,6 +77,16 @@ const Container = styled.div`
   overflow: hidden;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 
+  @media (max-width: 768px) {
+    grid-template-rows: 15% 70% 15%;
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-column: 20% 60% 20%;
+    padding: 0.5rem;
+  }
+
   .brand {
     display: flex;
     align-items: center;
@@ -87,6 +97,15 @@ const Container = styled.div`
       text-transform: uppercase;
       font-weight: bold;
       font-size: 1.2rem;
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1rem;
+        text-align: center; /* Center text alignment */
+      }
     }
   }
 
@@ -128,12 +147,29 @@ const Container = styled.div`
         height: 3rem;
         border-radius: 50%;
         border: 2px solid #adb5bd;
+
+        @media (max-width: 768px) {
+          height: 2.5rem;
+        }
+
+        @media (max-width: 480px) {
+          height: 2rem;
+        }
       }
 
       .username h3 {
         margin-left: 1rem;
         color: #f8f9fa;
         font-weight: 500;
+
+        @media (max-width: 768px) {
+          font-size: 1rem;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 0.9rem;
+          margin-left: 0.5rem; /* Reduce margin */
+        }
       }
     }
 
@@ -155,10 +191,30 @@ const Container = styled.div`
     position: relative;
     overflow: hidden;
 
+    @media (max-width: 768px) {
+      gap: 0.75rem;
+      padding: 0.75rem;
+    }
+
+    @media (max-width: 480px) {
+      gap: 0.5rem;
+      padding: 0.5rem;
+      flex-direction: row; /* Stack avatar and username vertically */
+      align-items: center; /* Center align items */
+    }
+
     .avatar img {
       height: 3.5rem;
       border-radius: 50%;
       border: 3px solid #1f1f1f;
+
+      @media (max-width: 768px) {
+        height: 3rem;
+      }
+
+      @media (max-width: 480px) {
+        height: 2.5rem;
+      }
     }
 
     .username h2 {
@@ -166,6 +222,15 @@ const Container = styled.div`
       font-size: 1.8rem;
       font-weight: 600;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.2rem;
+        text-align: center; /* Center text alignment */
+      }
     }
 
     &::before {
@@ -184,11 +249,6 @@ const Container = styled.div`
     .username {
       z-index: 2;
     }
-  }
-
-  
-
- 
   }
 `;
 
