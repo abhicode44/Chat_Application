@@ -49,13 +49,20 @@ function Login() {
           username,
           password,
         });
+        console.log("Login response:", data); // Debug log
+
         if (data.status === false) {
           toast.error(data.msg, toastOptions);
         } else if (data.status === true) {
-          localStorage.setItem('chat-app-user', JSON.stringify(data.user));
-          navigate("/");
+          if (data.user && data.user.username) { // Check if data.user and data.user.username exist
+            localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+            navigate("/");
+          } else {
+            toast.error("User data is missing.", toastOptions);
+          }
         }
       } catch (error) {
+        console.error('Error during login:', error); // Debug log
         toast.error("An error occurred. Please try again later.", toastOptions);
       }
     }
@@ -131,7 +138,6 @@ const FormContainer = styled.div`
     align-items: center;
     width: 100%;
 
-
     img {
       width: 150px;
       height: auto;
@@ -181,9 +187,5 @@ const FormContainer = styled.div`
     text-align: center;
   }
 `;
-
-
-
-
 
 export default Login;
