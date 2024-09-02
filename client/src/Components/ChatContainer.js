@@ -13,7 +13,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     const fetchMessages = async () => {
       if (currentUser && currentChat) {
         try {
-          const response = await axios.post("http://localhost:5000/api/messages/getmsg", {
+          const response = await axios.post("https://chat-application-9sdd.onrender.com/api/messages/getmsg", {
             from: currentUser._id,
             to: currentChat._id,
           });
