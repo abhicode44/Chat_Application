@@ -12,7 +12,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     const fetchMessages = async () => {
       if (currentUser && currentChat) {
         try {
-          const response = await axios.post("http://localhost:5000/api/messages/getmsg", {
+          const response = await axios.post("https://chat-application-plew.onrender.com/api/messages/getmsg", {
             from: currentUser._id,
             to: currentChat._id,
           });
@@ -44,7 +44,7 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
 
   const handleSendMsg = async (msg) => {
     try {
-      await axios.post("http://localhost:5000/api/messages/addmsg", {
+      await axios.post("https://chat-application-plew.onrender.com/api/messages/addmsg", {
         from: currentUser._id,
         to: currentChat._id,
         message: msg,
