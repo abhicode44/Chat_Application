@@ -58,6 +58,8 @@ const Container = styled.div`
   background-color: #080420;
   padding: 0.5rem 1rem;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 
   .emoji-picker-container {
     position: relative;
@@ -67,6 +69,14 @@ const Container = styled.div`
       color: yellow;
       cursor: pointer;
       padding-right: 0.5rem;
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1.25rem;
+      }
     }
 
     .emoji-picker {
@@ -75,11 +85,22 @@ const Container = styled.div`
       left: 0;
       transform: translateY(-10px);
       z-index: 10;
+      width: 350px; /* Default width */
+      max-width: 100%; /* Ensure it doesn't exceed container width */
+      
+      @media (max-width: 768px) {
+        width: 300px;
+      }
+
+      @media (max-width: 480px) {
+        width: 250px;
+      }
 
       .emoji-picker-react {
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
         background-color: #080420;
         border-color: #9a86f3;
+
         .emoji-scroll-wrapper::-webkit-scrollbar {
           background-color: #080420;
           width: 5px;
@@ -87,17 +108,47 @@ const Container = styled.div`
             background-color: #9a86f3;
           }
         }
-        .emoji-categories {
-          button {
-            filter: contrast(0);
-          }
+
+        .emoji-categories button {
+          filter: contrast(0);
         }
+
         .emoji-search {
           background-color: transparent;
           border-color: #9a86f3;
         }
+
         .emoji-group:before {
           background-color: #080420;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+          .emoji-scroll-wrapper::-webkit-scrollbar {
+            width: 4px;
+          }
+
+          .emoji-categories button {
+            font-size: 0.8rem;
+          }
+
+          .emoji-search {
+            font-size: 0.8rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .emoji-scroll-wrapper::-webkit-scrollbar {
+            width: 3px;
+          }
+
+          .emoji-categories button {
+            font-size: 0.7rem;
+          }
+
+          .emoji-search {
+            font-size: 0.7rem;
+          }
         }
       }
     }
@@ -120,8 +171,19 @@ const Container = styled.div`
       padding: 0.5rem;
       border-radius: 25px;
       outline: none;
+
       &::placeholder {
         color: #b0b0b0;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.8rem;
+        padding: 0.3rem;
       }
     }
 
@@ -139,14 +201,18 @@ const Container = styled.div`
       svg {
         font-size: 1.5rem;
         color: #0a7cff;
+
+        @media (max-width: 768px) {
+          font-size: 1.25rem;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 1rem;
+        }
       }
     }
   }
-
-  
-  }
-
-  
 `;
 
 export default ChatInput;
+
