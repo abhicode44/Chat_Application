@@ -67,7 +67,7 @@ export default function SetAvatar() {
       );
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/auth/setavatar/${user._id}`,
+        `https://chat-application-plew.onrender.com/api/auth/setavatar/${user._id}`,
         { image: avatars[selectedAvatar] }
       );
 
